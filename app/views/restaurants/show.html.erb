@@ -1,0 +1,35 @@
+<h3 class="text-center"><%= @restaurant.name %></h3>
+
+<div class="alert alert-info">
+  Address: <%= @restaurant.address %>
+  <br>
+  Contact: <%= @restaurant.phone_number %>
+</div>
+
+<h4 class="text-center">Reviews</h4>
+<div class="row">
+  <% @restaurant.reviews.each do |review| %>
+    <div class="card m-3">
+      <div class="card-body">
+        <h5 class="card-title">
+
+        <% if review.rating == 0 %>
+          <i class="fa-regular fa-star-half text-warning"></i>
+        <% else %>
+        <% review.rating.times do %>
+          <i class="fa-solid fa-star text-warning"></i>
+          <% end %>
+        <% end %>
+
+        </h5>
+        <p class="card-text"><%= review.content %></p>
+        <%= link_to restaurant_review_path(@restaurant, review),
+          data: {turbo_method: :delete, turbo_confirm: "sure ?"} do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'reviews/form', review: @review, restaurant: @restaurant %>
