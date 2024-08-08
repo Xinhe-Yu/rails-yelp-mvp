@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %w[destroy]
 
   def new
-    @review = Review.new
+    # @review = Review.new
   end
 
   def create
